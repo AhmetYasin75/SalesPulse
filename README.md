@@ -8,9 +8,22 @@ M&Y Yazılım Eğitim Akademi – 7. Proje (Dapper Case).
 
 ## Ekran görüntüleri
 
-| Dashboard | Orders Explorer | Sales Intelligence |
-|---|---|---|
-| ![Dashboard](docs/dashboard.png) | ![Orders Explorer](docs/orders-explorer.png) | ![Sales Intelligence](docs/sales-intelligence.png) |
+### Dashboard
+
+![Dashboard 1/3 - KPI kartları ve aylık satış trendi](docs/dashboard1.png)
+![Dashboard 2/3](docs/dashboard2.png)
+![Dashboard 3/3](docs/dashboard3.png)
+
+### Orders Explorer
+
+![Orders Explorer 1/2](docs/orders1.png)
+![Orders Explorer 2/2](docs/orders2.png)
+
+### Sales Intelligence
+
+![Sales Intelligence 1/3](docs/sales1.png)
+![Sales Intelligence 2/3](docs/sales2.png)
+![Sales Intelligence 3/3](docs/sales3.png)
 
 ## Sayfalar
 
