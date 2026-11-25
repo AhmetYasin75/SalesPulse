@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Siparişler";
+}
+
+<h1 class="page-title">Siparişler</h1>
+<p class="page-sub">Tüm siparişleri arayın, filtreleyin ve inceleyin.</p>
+
+<form class="card filters" id="filterForm" autocomplete="off">
+    <label class="field field-wide">
+        <span>Ara</span>
+        <input type="search" id="fSearch" placeholder="Sipariş no veya müşteri adı (ör. Selin)" />
+    </label>
+
+    <label class="field">
+        <span>Durum</span>
+        <select id="fStatus">
+            <option value="">Tümü</option>
+            <option>Tamamlandı</option>
+            <option>Beklemede</option>
+            <option>Kargoda</option>
+            <option>İptal Edildi</option>
+            <option>İade Edildi</option>
+        </select>
+    </label>
+
+    <label class="field">
+        <span>Şehir</span>
+        <select id="fCity">
+            <option value="">Tümü</option>
+        </select>
+    </label>
+
+    <label class="field">
+        <span>Başlangıç tarihi</span>
+        <input type="date" id="fStart" />
+    </label>
+
+    <label class="field">
+        <span>Bitiş tarihi</span>
+        <input type="date" id="fEnd" />
+    </label>
+
+    <label class="field">
+        <span>En düşük tutar</span>
+        <input type="number" id="fMin" min="0" step="0.01" placeholder="₺" />
+    </label>
+
+    <label class="field">
+        <span>En yüksek tutar</span>
+        <input type="number" id="fMax" min="0" step="0.01" placeholder="₺" />
+    </label>
+
+    <div class="filter-actions">
+        <button type="submit" class="btn primary">Filtrele</button>
+        <button type="button" class="btn" id="fReset">Temizle</button>
+        <button type="button" class="btn" id="fExport" title="Filtreye uyan en fazla 50.000 sipariş">CSV indir</button>
+    </div>
+</form>
+
+<div style="height:16px"></div>
+
+<div class="card">
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="sortable" data-sort="SiparisNo">Sipariş No<span class="sort-ind"></span></th>
+                    <th class="sortable" data-sort="Musteri">Müşteri<span class="sort-ind"></span></th>
+                    <th class="sortable" data-sort="Sehir">Şehir<span class="sort-ind"></span></th>
+                    <th class="sortable" data-sort="Tarih">Tarih<span class="sort-ind"></span></th>
+                    <th class="sortable num" data-sort="Tutar">Tutar<span class="sort-ind"></span></th>
+                    <th class="sortable" data-sort="OdemeYontemi">Ödeme Yöntemi<span class="sort-ind"></span></th>
+                    <th class="sortable" data-sort="Durum">Durum<span class="sort-ind"></span></th>
+                </tr>
+            </thead>
+            <tbody id="ordersBody">
+                <tr><td colspan="7" class="empty">Yükleniyor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-footer">
+        <span id="ordersInfo"></span>
+        <div class="pager">
+            <select id="pageSize" aria-label="Sayfa boyutu">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <button type="button" id="btnFirst" aria-label="İlk sayfa">«</button>
+            <button type="button" id="btnPrev">‹ Önceki</button>
+            <button type="button" id="btnNext">Sonraki ›</button>
+            <button type="button" id="btnLast" aria-label="Son sayfa">»</button>
+        </div>
+    </div>
+</div>
+
+<!-- Sipariş detay penceresi -->
+<div class="modal-backdrop" id="detailModal" hidden>
+    <div class="modal card" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <div class="modal-head">
+            <h2 id="detailTitle">Sipariş detayı</h2>
+            <button type="button" class="btn" id="detailClose" aria-label="Kapat">✕</button>
+        </div>
+        <div id="detailBody"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/orders.js" asp-append-version="true"></script>
+}

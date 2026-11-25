@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="page-title">Dashboard</h1>
+<p class="page-sub">Seçili tarih aralığındaki satış performansı.</p>
+
+<form class="card filters" id="dashFilter" autocomplete="off">
+    <label class="field">
+        <span>Başlangıç tarihi</span>
+        <input type="date" id="dStart" />
+    </label>
+
+    <label class="field">
+        <span>Bitiş tarihi</span>
+        <input type="date" id="dEnd" />
+    </label>
+
+    <div class="filter-actions">
+        <button type="submit" class="btn primary">Uygula</button>
+        <button type="button" class="btn" id="dReset">Son 12 ay</button>
+    </div>
+</form>
+
+<p class="dash-note" id="dashStatus"></p>
+
+<div class="kpi-grid">
+    <div class="card kpi kpi-blue">
+        <span class="kpi-label">Toplam sipariş</span>
+        <strong class="kpi-value" id="kpiOrders">–</strong>
+    </div>
+    <div class="card kpi kpi-mint">
+        <span class="kpi-label">Toplam ciro</span>
+        <strong class="kpi-value" id="kpiRevenue">–</strong>
+    </div>
+    <div class="card kpi kpi-lavender">
+        <span class="kpi-label">Toplam müşteri</span>
+        <strong class="kpi-value" id="kpiCustomers">–</strong>
+    </div>
+    <div class="card kpi kpi-orange">
+        <span class="kpi-label">Ortalama sepet</span>
+        <strong class="kpi-value" id="kpiBasket">–</strong>
+    </div>
+</div>
+<p class="dash-note">KPI'lar iptal ve iade edilen siparişleri hariç tutar.</p>
+
+<div class="card chart-card">
+    <h2 class="chart-title">Aylık satış trendi</h2>
+    <div class="chart-box"><canvas id="chartTrend"></canvas></div>
+    <p class="dash-note" id="trendNote"></p>
+</div>
+
+
+<div class="chart-grid">
+    <div class="card chart-card">
+        <h2 class="chart-title">Ciroya göre ilk 10 şehir</h2>
+        <div class="chart-box"><canvas id="chartCities"></canvas></div>
+    </div>
+    <div class="card chart-card">
+        <h2 class="chart-title">Ciroya göre ilk 10 kategori</h2>
+        <div class="chart-box"><canvas id="chartCategories"></canvas></div>
+    </div>
+</div>
+
+
+<div class="chart-grid">
+    <div class="card chart-card">
+        <h2 class="chart-title">Sipariş durumu dağılımı</h2>
+        <div class="chart-box"><canvas id="chartStatus"></canvas></div>
+        <p class="dash-note">Bu dağılım iptal ve iade edilen siparişleri de içerir; bu yüzden toplamı yukarıdaki KPI sipariş sayısından büyüktür.</p>
+    </div>
+    <div class="card chart-card">
+        <div class="chart-head">
+            <h2 class="chart-title">En çok satan ilk 10 ürün</h2>
+            <select id="productSort" aria-label="Ürün sıralaması">
+                <option value="Ciro">Ciroya göre</option>
+                <option value="Adet">Adede göre</option>
+            </select>
+        </div>
+        <div class="chart-box"><canvas id="chartProducts"></canvas></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+}

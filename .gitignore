@@ -1,0 +1,15 @@
+# Visual Studio çalışma klasörü ve kişisel ayarlar (başkasına lazım değil)
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Derleme çıktıları (her bilgisayarda yeniden üretilir, depoya girmemeli)
+bin/
+obj/
+
+# Yerel veritabanı yedekleri ve loglar (büyük dosyalar)
+*.bak
+*.mdf
+*.ldf
+*.log

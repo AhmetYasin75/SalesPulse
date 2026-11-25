@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "Satış Analizi";
+}
+
+<h1 class="page-title">Satış Analizi</h1>
+<p class="page-sub">Müşteri, kategori ve dönem bazlı gelişmiş satış raporları.</p>
+
+<form class="card filters" id="anFilter" autocomplete="off">
+    <label class="field">
+        <span>Başlangıç tarihi</span>
+        <input type="date" id="aStart" />
+    </label>
+
+    <label class="field">
+        <span>Bitiş tarihi</span>
+        <input type="date" id="aEnd" />
+    </label>
+
+    <div class="filter-actions">
+        <button type="submit" class="btn primary">Uygula</button>
+        <button type="button" class="btn" id="aReset">Son 12 ay</button>
+    </div>
+</form>
+
+<p class="dash-note" id="anStatus"></p>
+
+<h2 class="section-title">Dönem karşılaştırması</h2>
+<p class="dash-note" id="cmpNote"></p>
+
+<div class="kpi-grid">
+    <div class="card kpi kpi-blue">
+        <span class="kpi-label">Sipariş sayısı</span>
+        <strong class="kpi-value" id="cmpOrders">–</strong>
+        <span class="kpi-sub" id="cmpOrdersSub"></span>
+    </div>
+    <div class="card kpi kpi-mint">
+        <span class="kpi-label">Toplam ciro</span>
+        <strong class="kpi-value" id="cmpRevenue">–</strong>
+        <span class="kpi-sub" id="cmpRevenueSub"></span>
+    </div>
+    <div class="card kpi kpi-lavender">
+        <span class="kpi-label">Aktif müşteri</span>
+        <strong class="kpi-value" id="cmpCustomers">–</strong>
+        <span class="kpi-sub" id="cmpCustomersSub"></span>
+    </div>
+    <div class="card kpi kpi-orange">
+        <span class="kpi-label">Ortalama sepet</span>
+        <strong class="kpi-value" id="cmpBasket">–</strong>
+        <span class="kpi-sub" id="cmpBasketSub"></span>
+    </div>
+</div>
+<p class="dash-note">Karşılaştırma iptal ve iade edilen siparişleri hariç tutar.</p>
+
+<div class="card kpi kpi-mint repeat-card">
+    <span class="kpi-label">Tekrar alışveriş yapan müşteri oranı</span>
+    <strong class="kpi-value" id="repeatRate">–</strong>
+    <span class="kpi-sub" id="repeatSub"></span>
+</div>
+
+
+<div class="chart-grid split-3-2">
+    <div class="card chart-card">
+        <h2 class="chart-title">Ciroya göre ilk 20 müşteri</h2>
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Müşteri</th>
+                        <th>Şehir</th>
+                        <th class="num">Sipariş</th>
+                        <th class="num">Toplam ciro</th>
+                    </tr>
+                </thead>
+                <tbody id="customersBody">
+                    <tr><td colspan="5" class="empty">Yükleniyor...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="card chart-card">
+        <h2 class="chart-title">Kategorilerin aylık performansı (ciro)</h2>
+        <div class="chart-box"><canvas id="chartCatMonthly"></canvas></div>
+        <p class="dash-note">Ciroya göre ilk 5 kategori gösterilir. Seçili aralığın ilk ve son ayı tam değilse o aylar düşük görünebilir.</p>
+    </div>
+
+    <div class="card chart-card">
+        <h2 class="chart-title">En yüksek gelir sağlayan ürünler</h2>
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ürün</th>
+                        <th>Kategori</th>
+                        <th class="num">Satış adedi</th>
+                        <th class="num">Toplam ciro</th>
+                    </tr>
+                </thead>
+                <tbody id="productsBody">
+                    <tr><td colspan="5" class="empty">Yükleniyor...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card chart-card">
+        <h2 class="chart-title">En çok satış yapılan 10 şehir</h2>
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Şehir</th>
+                        <th>Bölge</th>
+                        <th class="num">Sipariş</th>
+                        <th class="num">Toplam ciro</th>
+                    </tr>
+                </thead>
+                <tbody id="citiesBody">
+                    <tr><td colspan="5" class="empty">Yükleniyor...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="~/js/analytics.js" asp-append-version="true"></script>
+}

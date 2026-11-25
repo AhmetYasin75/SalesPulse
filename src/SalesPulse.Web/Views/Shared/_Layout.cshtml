@@ -1,0 +1,75 @@
+﻿@{
+    // Aktif menü öğesini vurgulamak için geçerli controller adı
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string Active(string name) => string.Equals(controller, name, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>@ViewData["Title"] - SalesPulse</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <aside class="sidebar">
+        <a class="brand" href="/">
+            @* Logo kutusu: mevcut mor kare, içine ortalanmış küçük SVG ikon eklendi *@
+            <span class="brand-mark" style="display:inline-flex; align-items:center; justify-content:center;">
+                @* Sade grafik ikonu: 3 yükselen çubuk (beyaz çizgi, yuvarlak uçlu) *@
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+                    <line x1="5" y1="20" x2="5" y2="13" />
+                    <line x1="12" y1="20" x2="12" y2="8" />
+                    <line x1="19" y1="20" x2="19" y2="3" />
+                </svg>
+            </span> SalesPulse
+        </a>
+
+        <div class="nav-title">Menü</div>
+
+        <a class="nav-link @Active("Dashboard")" href="/Dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5" /><rect x="14" y="3" width="7" height="5" rx="1.5" /><rect x="14" y="12" width="7" height="9" rx="1.5" /><rect x="3" y="16" width="7" height="5" rx="1.5" /></svg>
+            Dashboard
+        </a>
+        <a class="nav-link @Active("Orders")" href="/Orders">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h18" /></svg>
+            Siparişler
+        </a>
+        <a class="nav-link @Active("Analytics")" href="/Analytics">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>
+            Satış Analizi
+        </a>
+    </aside>
+
+    <div class="main">
+        <header class="topbar">
+            <label class="search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+                <input type="search" placeholder="Ara..." aria-label="Ara" />
+            </label>
+
+            <div class="topbar-right">
+                <button class="icon-btn" type="button" aria-label="Bildirimler">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
+                    <span class="dot"></span>
+                </button>
+                <div class="profile">
+                    <div class="avatar">Y</div>
+                    <div>
+                        <div class="profile-name">Yönetici</div>
+                        <div class="profile-role">Satış Müdürü</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            @RenderBody()
+        </main>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
